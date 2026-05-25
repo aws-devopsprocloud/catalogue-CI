@@ -38,6 +38,15 @@ pipeline {
                 """
             }
         }
+        stage('Building the Artifacts') {
+            steps {
+                sh """
+                    ls -la
+                    zip -r -q catalogue.zip ./* -x ".git" -x "*.zip"
+                    ls -ltr
+                """
+            }
+        }
     }
     post {
         always {
