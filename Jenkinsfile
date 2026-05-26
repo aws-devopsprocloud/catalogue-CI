@@ -11,7 +11,7 @@ pipeline {
     }
     environment {
         packageVersion = ''
-        nexusURL = 'http://172.31.15.115:8081'
+        nexusURL = '172.31.15.115:8081'
     }
     stages {
         stage('Getting the Package Version') {
@@ -54,9 +54,9 @@ pipeline {
                 nexusArtifactUploader(
                     nexusVersion: 'nexus3',
                     protocol: 'http',
-                    nexusUrl: "$nexusURL",
+                    nexusUrl: $nexusURL,
                     groupId: 'com.roboshop',
-                    version: "$packageVersion",
+                    version: $packageVersion,
                     repository: 'catalogue',
                     credentialsId: 'nexus-auth',
                     artifacts: [
