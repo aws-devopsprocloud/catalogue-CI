@@ -68,6 +68,15 @@ pipeline {
                 )
             }
         }
+        stage('Uploading the Artifacts to Nexus') {
+            steps {
+                build job: 'Catalogue-CD', 
+                parameters: [
+                    string(name: 'ENVIRONMENT', value: 'dev'),
+                    string(name: 'VERSION', value: "${packageVersion}")
+                ]
+            }
+        }
     }
     post {
         always {
