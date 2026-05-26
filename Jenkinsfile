@@ -68,7 +68,7 @@ pipeline {
                 )
             }
         }
-        stage('Uploading the Artifacts to Nexus') {
+        stage('Giving the ENvironment & Package Version to CATALOGUE-CD') {
             steps {
                 build job: 'Catalogue-CD', 
                 parameters: [
