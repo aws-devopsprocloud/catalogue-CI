@@ -11,6 +11,7 @@ pipeline {
     }
     environment {
         packageVersion = ''
+        nexusURL = 'http://172.31.15.115:8081'
     }
     stages {
         stage('Getting the Package Version') {
@@ -48,10 +49,28 @@ pipeline {
                 """
             }
         }
+        stage('Uploading the Artifacts to Nexus')
+            steps {
+                nexusArtifactUploader(
+                    nexusVersion: 'nexus3',
+                    protocol: 'http',
+                    nexusUrl: $nexusURL,
+                    groupId: 'com.roboshop',
+                    version: $packageVersion,
+                    repository: 'catalogue',
+                    credentialsId: 'nexus-auth',
+                    artifacts: [
+                        [artifactId: catalogue,
+                        classifier: '',
+                        file: 'catalogue.zip',
+                        type: 'zip']
+                    ]
+                )
+            }
     }
     post {
         always {
-            echo 'Pipeline execution is COMPLETED'
+            echo 'PIPELINE EXECUTION IS COMPLETED'
         }
         failure {
             echo 'The pipeline is FAILED'
