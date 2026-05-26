@@ -49,7 +49,7 @@ pipeline {
                 """
             }
         }
-        stage('Uploading the Artifacts to Nexus')
+        stage('Uploading the Artifacts to Nexus') {
             steps {
                 nexusArtifactUploader(
                     nexusVersion: 'nexus3',
@@ -67,6 +67,7 @@ pipeline {
                     ]
                 )
             }
+        }
     }
     post {
         always {
