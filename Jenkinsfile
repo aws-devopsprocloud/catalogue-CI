@@ -68,7 +68,7 @@ pipeline {
                 )
             }
         }
-        stage('Giving the ENvironment & Package Version to CATALOGUE-CD') {
+        stage('Giving the Package Version & Environment to CATALOGUE-CD') {
             steps {
                 build job: 'Catalogue-CD', 
                 parameters: [
