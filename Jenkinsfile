@@ -39,6 +39,13 @@ pipeline {
                 """
             }
         }
+        stage('SonarQube Scanning') {
+            steps {
+                sh """
+                    sonar-scanner
+                """
+            }
+        }
         stage('Building the Artifacts') {
             steps {
                 sh """
@@ -68,15 +75,15 @@ pipeline {
                 )
             }
         }
-        stage('Giving the Package Version & Environment to CATALOGUE-CD') {
-            steps {
-                build job: 'CATALOGUE-CD', 
-                parameters: [
-                    string(name: 'ENVIRONMENT', value: 'dev'),
-                    string(name: 'VERSION', value: "${packageVersion}")
-                ]
-            }
-        }
+        // stage('Giving the Package Version & Environment to CATALOGUE-CD') {
+        //     steps {
+        //         build job: 'CATALOGUE-CD', 
+        //         parameters: [
+        //             string(name: 'ENVIRONMENT', value: 'dev'),
+        //             string(name: 'VERSION', value: "${packageVersion}")
+        //         ]
+        //     }
+        // }
     }
     post {
         always {
