@@ -80,8 +80,11 @@ pipeline {
         }
         stage('Giving the Package Version & Environment to CATALOGUE-CD') {
             when {
+                expression {
                     params.DEPLOY
                 }
+                    
+            }
             steps {
                 build job: 'CATALOGUE-CD', 
                 parameters: [
