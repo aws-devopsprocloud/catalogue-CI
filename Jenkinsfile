@@ -13,6 +13,9 @@ pipeline {
         packageVersion = ''
         nexusURL = '172.31.10.70:8081'
     }
+    parameters {
+        booleanParam(name: 'DEPLOY', defaultValue: false, description: 'Toggle this value')
+    }
     stages {
         stage('Getting the Package Version') {
             steps {
@@ -75,15 +78,18 @@ pipeline {
                 )
             }
         }
-        // stage('Giving the Package Version & Environment to CATALOGUE-CD') {
-        //     steps {
-        //         build job: 'CATALOGUE-CD', 
-        //         parameters: [
-        //             string(name: 'ENVIRONMENT', value: 'dev'),
-        //             string(name: 'VERSION', value: "${packageVersion}")
-        //         ]
-        //     }
-        // }
+        stage('Giving the Package Version & Environment to CATALOGUE-CD') {
+            when {
+                    params.DEPLOY
+                }
+            steps {
+                build job: 'CATALOGUE-CD', 
+                parameters: [
+                    string(name: 'ENVIRONMENT', value: 'dev'),
+                    string(name: 'VERSION', value: "${packageVersion}")
+                ]
+            }
+        }
     }
     post {
         always {
