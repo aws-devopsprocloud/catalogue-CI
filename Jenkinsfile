@@ -11,7 +11,7 @@ pipeline {
     }
     environment {
         packageVersion = ''
-        nexusURL = '172.31.12.44:8081'
+        nexusURL = '172.31.10.70:8081'
     }
     stages {
         stage('Getting the Package Version') {
@@ -70,7 +70,7 @@ pipeline {
         }
         stage('Giving the Package Version & Environment to CATALOGUE-CD') {
             steps {
-                build job: 'Catalogue-CD', 
+                build job: 'CATALOGUE-CD', 
                 parameters: [
                     string(name: 'ENVIRONMENT', value: 'dev'),
                     string(name: 'VERSION', value: "${packageVersion}")
