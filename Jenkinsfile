@@ -6,4 +6,8 @@ def configMap = [
     application = "nodejsVM"
 ]
 
-sh 'printenv'
+if (! env.BRANCH_NAME.equalsIgnoreCase('main')) {
+    pipelineDecision.decidePipeline(configMap)
+else 
+    echo "This is not a featiure branch, Deal with CR process."
+}
