@@ -8,6 +8,7 @@ def configMap = [
 
 if (! env.BRANCH_NAME.equalsIgnoreCase('main')) {
     pipelineDecision.decidePipeline(configMap)
-else 
+}
+else {
     echo "This is not a featiure branch, Deal with CR process."
 }
