@@ -10,5 +10,5 @@ if (! env.BRANCH_NAME.equalsIgnoreCase('main')) {
     pipelineDecision.decidePipeline(configMap)
 }
 else {
-    echo "This is not a featiure branch, Deal with CR process."
+    echo "This is a Main branch i.e PRODUCTION, Please deal with CR process."
 }
